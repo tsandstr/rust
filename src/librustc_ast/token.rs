@@ -306,11 +306,12 @@ impl TokenKind {
 
     /// Returns tokens that are likely to be typed accidentally instead of the current token.
     /// Enables better error recovery when the wrong token is found.
-    pub fn similar_tokens(&self) -> Option<Vec<TokenKind>> {
+    pub fn similar_tokens(&self) -> Vec<TokenKind>  {
         match *self {
-            Comma => Some(vec![Dot, Lt, Semi]),
-            Semi => Some(vec![Colon, Comma]),
-            _ => None,
+            Comma => vec![Dot, Lt, Semi],
+            Dot => vec![Comma],
+            Semi => vec![Colon, Comma],
+            _ => Vec::new()
         }
     }
 }

@@ -656,10 +656,8 @@ impl<'a> Parser<'a> {
                             let token_str = pprust::token_kind_to_string(t);
 
                             // Attempt to keep parsing if it was a similar separator.
-                            if let Some(ref tokens) = t.similar_tokens() {
-                                if tokens.contains(&self.token.kind) {
-                                    self.bump();
-                                }
+                            if t.similar_tokens().contains(&self.token.kind) {
+                                self.bump();
                             }
 
                             // Attempt to keep parsing if it was an omitted separator.
